@@ -1,0 +1,103 @@
+#!/usr/bin/env node
+
+// New: Include http for making the metadata request
+const http = require('http');
+
+const os = require('os');
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('mashupproject:server');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+
+  // New: Retrieve public IPv4 from EC2 metadata service
+  http.get('http://169.254.169.254/latest/meta-data/public-ipv4', (res) => {
+    res.setEncoding('utf8');
+    res.on('data', (publicIp) => {
+      console.log(`Server is running at http://${publicIp}:${addr.port}`);
+    });
+  }).on('error', (e) => {
+    console.error(`Error retrieving public IP: ${e.message}`);
+  });
+}

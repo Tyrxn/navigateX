@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href='stylesheets/style.css' />
+    <script type="module" src="javascripts/index.js"></script>
+  </head>
+  <body>
+  
+  <div id="mainContainer">
+    <nav class="navbar">
+      <div class="navbar-content">
+        <div class="logo">
+          NavigateX
+        </div>
+        <p>Page Count: {{pageCount}}</p>
+      </div>
+    </nav>
+
+    <div id="startContainer" class="form__group">
+      <div class="start form__group">
+        <input type="text" id="start" class="form__field">
+        <label for="start" class="form__label">Enter a Starting Location</label>
+      </div>
+      <div>
+        <button id="startButton" class="nextButton">
+          <svg viewBox='0 0 200 200' width='200' height='200' xmlns='http://www.w3.org/2000/svg' class="link__svg" aria-labelledby="link1-title link1-desc">
+            <path id="link-circle" class="link__path" d="M 20, 100 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0" stroke="none" fill="none" />
+            <path class="link__arrow" d="M 75 100 L 125 100 L 110 85 M 125 100 L 110 115"  fill="none" />
+            <text class="link__text">
+              <textPath href="#link-circle" stroke="none">
+                Come Quick and Click here
+              </textPath>
+            </text>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="end form__group">
+        <input type="text" id="end" class="form__field" >
+        <label for="end" class="form__label">Enter a Destination</label>
+      </div>
+      <div>
+        <button id="endButton" class="nextButton">
+          <svg viewBox='0 0 200 200' width='200' height='200' xmlns='http://www.w3.org/2000/svg' class="link__svg" aria-labelledby="link1-title link1-desc">
+            <path id="link-circle" class="link__path" d="M 20, 100 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0" stroke="none" fill="none" />
+            <path class="link__arrow" d="M 75 100 L 125 100 L 110 85 M 125 100 L 110 115"  fill="none" />
+            <text class="link__text">
+              <textPath href="#link-circle" stroke="none">
+                Come Quick and Click here
+              </textPath>
+            </text>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="departTime form__group">
+        <input type="datetime-local" id="departureTime" class="form__field">
+        <label for="departureTime" class="form__label">Enter Departure Time</label>
+      </div>
+      <div>
+        <button id="submit" class="nextButton">
+          <svg viewBox='0 0 200 200' width='200' height='200' xmlns='http://www.w3.org/2000/svg' class="link__svg" aria-labelledby="link1-title link1-desc">
+            <path id="link-circle" class="link__path" d="M 20, 100 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0" stroke="none" fill="none" />
+            <path class="link__arrow" d="M 75 100 L 125 100 L 110 85 M 125 100 L 110 115"  fill="none" />
+            <text class="link__text">
+              <textPath href="#link-circle" stroke="none">
+                Come Quick and Click here
+              </textPath>
+            </text>
+          </svg>
+        </button>
+        </div>
+    </div>
+  </div>
+
+  <div id="container">
+    <div id="customSidebar"></div>
+    <div id="map"></div>
+
+  </div>
+  </body>
+</html>
